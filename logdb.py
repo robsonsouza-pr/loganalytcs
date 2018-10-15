@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Classe responsavel por fazer consultas ao banco de dados e exibir o resultad
 o na tela"""
 
@@ -29,10 +30,10 @@ def questao2():
     # cursor eh um objeto que permite executar queries
     c = db.cursor()
     c.execute(
-        "select au.name, a.title, count(l.id) as acessos from articles a" +
+        "select au.name, count(l.id) as acessos from articles a" +
         " inner join authors au on au.id = a.author " +
         " inner join log l on a.slug =  substring(l.path from 10) " +
-        " group by au.name, a.title order by acessos desc limit 3"
+        " group by au.name order by acessos desc limit 3"
     )
     return c.fetchall()
     # fecha a conexao
